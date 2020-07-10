@@ -111,7 +111,7 @@ let tests = [
     SAME_ORIGIN,
     "",
     "",
-    `same-origin; report-to="${popupReportEndpoint.name}"`,
+    `same-origin; report-to="${popupReportOnlyEndpoint.name}"`,
     "require-corp",
     [
       {
@@ -127,7 +127,22 @@ let tests = [
           "url": `${location.href}`,
           "type": "coop"
         }
-      },]
+      },
+      {
+        "endpoint": popupReportOnlyEndpoint,
+        "report": {
+          "body": {
+            "disposition": "reporting",
+            "document-uri": /uuid=EXECUTOR_UUID$/,
+            "effective-policy": "same-origin-plus-coep",
+            "navigation-uri": `${location.href}`,
+            "violation-type": "navigation-to-document"
+          },
+          "url": /uuid=EXECUTOR_UUID$/,
+          "type": "coop"
+        }
+      }
+    ]
   ],
   // Open a cross-origin popup with a same-origin COOP report only. A report is
   // sent to both this page's endpoint and the popup's.

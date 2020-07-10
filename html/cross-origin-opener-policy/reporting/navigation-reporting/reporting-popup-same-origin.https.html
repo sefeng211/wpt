@@ -102,7 +102,22 @@ let tests = [
     "",
     `same-origin; report-to="${popupReportOnlyEndpoint.name}"`,
     "",
-    []
+    [
+      {
+        "endpoint": popupReportOnlyEndpoint,
+        "report": {
+          "body": {
+            "disposition": "reporting",
+            "document-uri": /uuid=EXECUTOR_UUID$/,
+            "effective-policy": "same-origin",
+            "navigation-uri": `${location.href}`, // referrer
+            "violation-type": "navigation-to-document"
+          },
+          "url": /uuid=EXECUTOR_UUID$/,
+          "type": "coop"
+        }
+      }
+    ]
   ],
 ];
 
